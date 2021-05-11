@@ -8,7 +8,9 @@ var points = [
     {x: 200, y: 450},
 ];
 
-var boxContainer = document.getElementsByClassName('box-container');
+var boxContainer = document.getElementsByTagName('canvas');
+
+
 
 
 // points.forEach(function(val, index) {
@@ -25,9 +27,11 @@ var boxContainer = document.getElementsByClassName('box-container');
 //     }
 // });
 
-function Circle(x, y){
-    // this.x = x;
-    // this.y = y;
+function Circle(x, y, r){
+    this.x = x;
+    this.y = y;
+    this.r = r;
+    this.color = '#ff0000';
 
     var circleElement = document.createElement('div');
     circleElement.setAttribute('class', 'circle');
@@ -42,16 +46,23 @@ function Circle(x, y){
 
 }(this.bind)
 
-var circle = new Circle(100,200)
-console.log('circle',circle)
 
-var circleArray = Array(100).map((_, i) => i).map(() => new Circle(math.random,10))
-console.log('circlearray',circleArray)
-
-circleArray.forEach(circle => {
-    circle.checkCollision(circleArray)
-})
-
-function checkCollision(circleArray){
+function loop(){
+    window.requestAnimationFrame(loop);
+    boxContainer.fillStyle = circle.color;
+    boxContainer.beginPath();
+    boxContainer.arc(circle.x, circle.y, circle.r, 0, Math.PI * 2);
+    boxContainer.fill();
     
-}
+};
+
+// var circleArray = Array(100).map((_, i) => i).map(() => new Circle(math.random,10))
+// console.log('circlearray',circleArray)
+
+// circleArray.forEach(circle => {
+//     circle.checkCollision(circleArray)
+// })
+
+// function checkCollision(circleArray){
+
+// }

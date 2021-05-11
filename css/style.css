@@ -1,10 +1,11 @@
-.box-container{
-    margin-top: 50px;
+canvas{
+    margin-top: 100px;
     height: 600px;
-    width: 600px;
+    width: 1200px;
     border-radius: 10px;
     border: solid 1px black;
     position: relative;
+    display: inherit;
 }
 
 .circle{
