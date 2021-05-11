@@ -1,0 +1,22 @@
+.box-container{
+    margin-top: 50px;
+    height: 600px;
+    width: 600px;
+    border-radius: 10px;
+    border: solid 1px black;
+    position: relative;
+}
+
+.circle{
+    position: absolute;
+    border-radius: 50%;
+    width: 50px;
+    height:50px;
+    background-color: green;
+    position:absolute;
+}
+
+.circle:hover{
+    cursor: pointer;
+    background-color: red;
+}
