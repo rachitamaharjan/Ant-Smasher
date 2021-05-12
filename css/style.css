@@ -1,9 +1,9 @@
 canvas{
-    margin-top: 100px;
-    height: 1200px; 
-    width: 600px;
+    margin-top: 10px;
+    height: 700px; 
+    width: 350px;
     border-radius: 10px;
-    border: solid 1px black;
+    border: solid 5px black;
     position: relative;
     display: inherit;
 }

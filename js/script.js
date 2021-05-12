@@ -1,4 +1,4 @@
-const speed = 4
+const speed = 2
 
 function Circle(x, y, r){
     this.x = x;
@@ -45,8 +45,6 @@ function Circle(x, y, r){
 }
 
 var boxContainer = document.querySelector('canvas').getContext('2d');
-console.log('hh',boxContainer,'kk' )
-
 
 
 
