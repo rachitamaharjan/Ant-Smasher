@@ -1,4 +1,4 @@
-const speed = 4
+const speed = 2
 
 function Circle(x, y, r){
     this.x = x;
@@ -7,6 +7,7 @@ function Circle(x, y, r){
     this.color = '#'+Math.floor(Math.random()*16777215).toString(16);
     this.movement = Math.random() * Math.PI * 2;
 
+  
     this.updatePosition = function(){
         this.x += Math.cos(this.movement) * speed;
         this.y += Math.sin(this.movement) * speed;
@@ -35,17 +36,16 @@ function Circle(x, y, r){
             
             if(this != circleArray[j]){
                 if (distance(this.x, this.y, circleArray[j].x, circleArray[j].y) - (this.r * 2) < 0) {
-                    console.log('yes, collision detected', distance(this.x, this.y, circleArray[j].x, circleArray[j].y) - (this.r * 2) )
+                    // console.log('yes, collision detected', distance(this.x, this.y, circleArray[j].x, circleArray[j].y) - (this.r * 2) )
                     this.movement = Math.atan2(Math.sin(this.movement) * -1, Math.cos(this.movement)* -1)
                 }
             }
         }
-        }
+    }
 
 }
 
 var boxContainer = document.querySelector('canvas').getContext('2d');
-console.log('hh',boxContainer,'kk' )
 
 
 
@@ -75,7 +75,11 @@ for(i = 0; i < 10; i++){
     boxContainer.canvas.width = document.documentElement.clientHeight
     boxContainer.canvas.height = document.documentElement.clientWidth
 
+    
+
     for(i = 0; i < circleArray.length; i++){
+
+        
         var circle = circleArray[i]
         boxContainer.fillStyle = circle.color;
         boxContainer.beginPath();
@@ -83,6 +87,27 @@ for(i = 0; i < 10; i++){
         boxContainer.fill();
         circle.updatePosition();
         circle.checkCollision()   
+
+        
     }
 })();
+
+var canvas = document.getElementsByTagName('canvas');
+console.log('hh',canvas,'kk' )
+canvas[0].addEventListener('click', (e) => {
+    console.log('kkk')
+    clickedItems(e, circleArray); })
+
+function clickedItems(e, circleArray){
+    circleArray.forEach((circle, index) => {
+        const cursor = {
+          x: e.clientX,
+          y: e.clientY,
+        };
+        const displacement = distance(cursor, circle);
+        if (displacement < circle.r) {
+          circleArray.splice(index, 1);
+        }
+      });
+}
 
