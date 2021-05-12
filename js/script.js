@@ -33,26 +33,7 @@ function Circle(x, y, r){
     this.color = '#'+Math.floor(Math.random()*16777215).toString(16);
     this.movement = Math.random() * Math.PI * 2;
 
-    // var circleElement = document.createElement('div');
-    // circleElement.setAttribute('class', 'circle');
-    // circleElement.style.top = y + 'px';
-    // circleElement.style.left = x + "px";
-    // boxContainer[0].appendChild(circleElement);
-
-    // circle.onclick=function deletePoint(){
-        // this.parentNode.removeChild(this);
-        // points.splice(index,1);
-    // }
-
-}
-
-var boxContainer = document.querySelector('canvas').getContext('2d');
-console.log('hh',boxContainer,'kk' )
-
-
-
-Circle.prototype = {
-    updatePosition : function(){
+    this.updatePosition = function(){
         this.x += Math.cos(this.movement) * 4;
         this.y += Math.sin(this.movement) * 4;
 
@@ -73,14 +54,55 @@ Circle.prototype = {
             this.movement = Math.atan2(Math.cos(this.movement), Math.sin(this.movement)* -1)
         }
     }
-};
+
+    this.checkCollision = function(){
+
+        for(j = 0; j< circleArray.length; j++){
+            
+            if(this != circleArray[j]){
+                if (distance(this.x, this.y, circleArray[j].x, circleArray[j].y) - (this.r * 2) < 0) {
+                    console.log('yes, collision detected', distance(this.x, this.y, circleArray[j].x, circleArray[j].y) - (this.r * 2) )
+                    this.movement = Math.atan2(Math.sin(this.movement) * -1, Math.cos(this.movement)* -1)
+                }
+            }
+        }
+        }
+        // console.log('iik',circleArray, 'ok',this)
+        // // circleArray.forEach(check)
+        // // function check(circle){
+        //     }
+
+        // }
+
+    // }
+
+}
+
+var boxContainer = document.querySelector('canvas').getContext('2d');
+console.log('hh',boxContainer,'kk' )
+
+
 
 // var circle = new Circle(boxContainer.canvas.offsetLeft,boxContainer.canvas.offsetTop, 30)
 // console.log('circle',circle);
 
 var circleArray = [];
-for(i = 0; i < 50; i++){
-    circleArray.push(new Circle(boxContainer.canvas.offsetLeft, boxContainer.canvas.offsetTop, 30))
+for(i = 0; i < 10; i++){
+    var x = Math.random() * innerWidth
+    var y = Math.random() * innerHeight
+    // var x = boxContainer.canvas.offsetLeft
+    // var y = boxContainer.canvas.offsetTop
+    var r = 30
+    if(i != 0){
+        for(j = 0; j< circleArray.length; j++){
+            if(distance(x, y, circleArray[j].x, circleArray[j].y) - (r * 2)  < 0){
+                x = Math.random() * innerWidth
+                y = Math.random() * innerHeight
+                j = -1
+            }
+        }
+    }
+    circleArray.push(new Circle(x, y, r))
 }
 
 
@@ -102,38 +124,9 @@ for(i = 0; i < 50; i++){
         boxContainer.arc(circle.x, circle.y, circle.r, 0, Math.PI * 2);
         boxContainer.fill();
         circle.updatePosition();
+        circle.checkCollision()
+
+        
     }
 })();
 
-// (function loop(){
-//     // var circle = circleArray[]
-//     window.requestAnimationFrame(loop);
-    
-//     circleArray.forEach(drawCircles)
-
-//     boxContainer.canvas.width = document.documentElement.clientHeight
-//     boxContainer.canvas.height = document.documentElement.clientWidth
-
-//     function drawCircles(circle){
-//         boxContainer.fillStyle = circle.color;
-//         boxContainer.beginPath();
-//         boxContainer.arc(circle.x, circle.y, circle.r, 0, Math.PI * 2);
-//         boxContainer.fill();
-//         circle.updatePosition();
-//     }
-// })();
-
-
-
-
-
-// var circleArray = Array(100).map((_, i) => i).map(() => new Circle())
-// console.log('circlearray',circleArray)
-
-// circleArray.forEach(circle => {
-//     circle.checkCollision(circleArray)
-// })
-
-// function checkCollision(circleArray){
-
-// }
