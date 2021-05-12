@@ -49,12 +49,11 @@ var boxContainer = document.querySelector('canvas').getContext('2d');
 
 
 
-
 var circleArray = [];
-for(i = 0; i < 10; i++){
+for(i = 0; i < 5; i++){
     var x = Math.random() * innerWidth
     var y = Math.random() * innerHeight
-    var r = 30
+    var r = 50
     if(i != 0){
         for(j = 0; j< circleArray.length; j++){
             if(distance(x, y, circleArray[j].x, circleArray[j].y) - (r * 2)  < 0){
@@ -72,8 +71,9 @@ for(i = 0; i < 10; i++){
 
 (function loop(){
     window.requestAnimationFrame(loop);
-    boxContainer.canvas.width = document.documentElement.clientHeight
-    boxContainer.canvas.height = document.documentElement.clientWidth
+    boxContainer.canvas.width = document.documentElement.clientWidth
+    boxContainer.canvas.height = document.documentElement.clientHeight
+    
 
     
 
@@ -93,9 +93,12 @@ for(i = 0; i < 10; i++){
 })();
 
 var canvas = document.getElementsByTagName('canvas');
-console.log('hh',canvas,'kk' )
+
+    canvas.width = window.innerWidth;
+    canvas.height =window.innerHeight;
+// console.log('hh',canvas,'kk' )
 canvas[0].addEventListener('click', (e) => {
-    console.log('kkk')
+    // console.log('kkk')
     clickedItems(e, circleArray); })
 
 function clickedItems(e, circleArray){
@@ -104,8 +107,13 @@ function clickedItems(e, circleArray){
           x: e.clientX,
           y: e.clientY,
         };
-        const displacement = distance(cursor, circle);
-        if (displacement < circle.r) {
+        console.log('hh',cursor)
+        console.log('yh', circle.x, circle.y)
+        const dist = Math.sqrt(Math.pow((circle.x - cursor.x), 2) + Math.pow((circle.y - cursor.y), 2));;
+        console.log('dd',dist, circle.r)
+        if (dist <= circle.r * 2) {
+            console.log('clicked')
+            // shape.showClickResponse();
           circleArray.splice(index, 1);
         }
       });
